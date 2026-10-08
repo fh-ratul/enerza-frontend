@@ -4,9 +4,7 @@ export const siteConfig = {
   description:
     "Enerza tells you when the power will go out and why, tracks every outage from first report to repair, and lets you pay your electricity bill online.",
   url: (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/+$/, ""),
-  supportEmail: "support@enerza.app",
-  hotline: "16999",
-  address: "Bidyut Bhaban, 1 Abdul Gani Road, Dhaka 1000",
+  serviceArea: "Dhaka North and Dhaka South",
 } as const;
 
 export const marketingNav = [
