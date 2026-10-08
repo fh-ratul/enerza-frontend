@@ -125,12 +125,13 @@
   --ink: oklch(0.17 0.025 262);
   --ink-foreground: oklch(0.96 0.005 262);
 
-  --chart-1: oklch(0.55 0.19 258);
-  --chart-2: oklch(0.72 0.16 75);
-  --chart-3: oklch(0.6 0.13 165);
-  --chart-4: oklch(0.6 0.2 20);
-  --chart-5: oklch(0.55 0.2 300);
-  --chart-6: oklch(0.6 0.11 220);
+  /* Chart series: a validated categorical palette, always assigned in this order. */
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+  --chart-3: #1baf7a;
+  --chart-4: #eda100;
+  --chart-5: #e87ba4;
+  --chart-6: #008300;
 
   --radius: 0.75rem;
 
@@ -172,12 +173,12 @@
   --ink: oklch(0.13 0.02 262);
   --ink-foreground: oklch(0.96 0.005 262);
 
-  --chart-1: oklch(0.68 0.16 255);
-  --chart-2: oklch(0.82 0.16 85);
-  --chart-3: oklch(0.74 0.14 165);
-  --chart-4: oklch(0.7 0.18 20);
-  --chart-5: oklch(0.7 0.17 300);
-  --chart-6: oklch(0.74 0.1 220);
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+  --chart-6: #008300;
 
   --sidebar: oklch(0.175 0.022 262);
   --sidebar-foreground: oklch(0.96 0.005 262);
