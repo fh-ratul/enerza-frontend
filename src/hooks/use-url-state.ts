@@ -1,24 +1,52 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useTransition } from "react";
+import { createContext, useCallback, useContext, useMemo, useTransition } from "react";
 import type { SortOrder } from "@/lib/api/resources";
 
 type Updates = Record<string, string | number | boolean | null | undefined>;
 
 /**
+ * How a change to the URL's query string is applied.
+ *
+ * - "navigate": a router navigation, so Server Components that read
+ *   `searchParams` render again. The public pages work this way.
+ * - "shallow": only the address bar changes (History API). The dashboards work
+ *   this way: their lists are fetched in the browser by TanStack Query, so a
+ *   filter responds at once instead of waiting for a server round trip.
+ */
+export type UrlStateMode = "navigate" | "shallow";
+
+export const UrlStateModeContext = createContext<UrlStateMode>("navigate");
+
+/**
  * Filters, search, sorting and pagination live in the URL, so a view can be
- * bookmarked, shared and reached with the back button. This hook reads them
- * and writes them back with `router.replace`, which keeps the history clean
- * while someone is typing in a search box.
+ * bookmarked, shared and restored on reload. This hook reads them and writes
+ * them back by replacing the current history entry, which keeps the history
+ * clean while someone is typing in a search box.
  */
 export const useUrlState = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const mode = useContext(UrlStateModeContext);
   const [isPending, startTransition] = useTransition();
 
   const get = useCallback((key: string) => searchParams.get(key) ?? undefined, [searchParams]);
+
+  const go = useCallback(
+    (query: string) => {
+      const url = query ? `${pathname}?${query}` : pathname;
+
+      if (mode === "shallow") {
+        // Next.js keeps useSearchParams() in step with the History API.
+        window.history.replaceState(null, "", url);
+      } else {
+        startTransition(() => router.replace(url, { scroll: false }));
+      }
+    },
+    [mode, pathname, router],
+  );
 
   /**
    * Sets or removes (null / undefined / "") any number of params at once.
@@ -40,18 +68,12 @@ export const useUrlState = () => {
         next.delete("page");
       }
 
-      const query = next.toString();
-
-      startTransition(() => {
-        router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-      });
+      go(next.toString());
     },
-    [pathname, router, searchParams],
+    [go, searchParams],
   );
 
-  const clear = useCallback(() => {
-    startTransition(() => router.replace(pathname, { scroll: false }));
-  }, [pathname, router]);
+  const clear = useCallback(() => go(""), [go]);
 
   return { get, set, clear, isPending, searchParams };
 };

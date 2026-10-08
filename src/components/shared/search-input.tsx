@@ -1,7 +1,7 @@
 "use client";
 
 import { Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   InputGroup,
   InputGroupAddon,
@@ -9,9 +9,10 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Spinner } from "@/components/ui/spinner";
-import { useDebounce } from "@/hooks/use-debounce";
 import { useUrlState } from "@/hooks/use-url-state";
 import { cn } from "@/lib/utils";
+
+const PAUSE_MS = 350;
 
 type SearchInputProps = {
   placeholder: string;
@@ -22,37 +23,57 @@ type SearchInputProps = {
 
 /**
  * A search box whose value lives in the URL. Typing updates the URL after a
- * short pause, so a search can be shared, bookmarked and undone with Back.
+ * short pause, so a search can be shared, bookmarked and restored on reload.
  */
 export function SearchInput({ placeholder, paramKey = "searchTerm", className }: SearchInputProps) {
   const { get, set, isPending } = useUrlState();
   const current = get(paramKey) ?? "";
   const [value, setValue] = useState(current);
-  const debounced = useDebounce(value.trim());
+  // What the URL said at the last render, and what this box last wrote to it.
+  const [seen, setSeen] = useState(current);
+  const [written, setWritten] = useState(current);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  // The pause outlives the render that started it: write through the latest `set`.
+  const latestSet = useRef(set);
 
-  // Typing → URL, once the visitor pauses.
   useEffect(() => {
-    if (debounced !== current) {
-      set({ [paramKey]: debounced });
+    latestSet.current = set;
+  }, [set]);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  // URL → box, when the URL changes from elsewhere ("Clear filters", a link).
+  // A change this box caused itself is skipped: the visitor may have typed
+  // more since, and that must not be replaced by their own earlier text.
+  if (current !== seen) {
+    setSeen(current);
+
+    if (current !== written) {
+      setValue(current);
+      setWritten(current);
     }
-    // Only the debounced value should trigger this; `current` and `set` follow from it.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debounced]);
+  }
 
-  // URL → box, when the URL changes from elsewhere (Back button, "clear filters").
-  useEffect(() => {
-    setValue(current);
-  }, [current]);
+  // Box → URL, once the visitor pauses (at once when the box is cleared).
+  const change = (text: string, pauseMs = PAUSE_MS) => {
+    setValue(text);
+    clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      const term = text.trim();
+
+      setWritten(term);
+      latestSet.current({ [paramKey]: term });
+    }, pauseMs);
+  };
 
   return (
     <InputGroup className={cn("w-full sm:max-w-xs", className)}>
-      <InputGroupAddon>
-        {isPending ? <Spinner /> : <Search aria-hidden />}
-      </InputGroupAddon>
+      <InputGroupAddon>{isPending ? <Spinner /> : <Search aria-hidden />}</InputGroupAddon>
       <InputGroupInput
         type="search"
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => change(event.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
         maxLength={100}
@@ -60,7 +81,7 @@ export function SearchInput({ placeholder, paramKey = "searchTerm", className }:
       />
       {value ? (
         <InputGroupAddon align="inline-end">
-          <InputGroupButton size="icon-xs" aria-label="Clear search" onClick={() => setValue("")}>
+          <InputGroupButton size="icon-xs" aria-label="Clear search" onClick={() => change("", 0)}>
             <X />
           </InputGroupButton>
         </InputGroupAddon>

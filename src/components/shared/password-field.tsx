@@ -24,26 +24,29 @@ export function PasswordField<T extends FieldValues>({
   autoComplete,
   placeholder,
 }: PasswordFieldProps<T>) {
-  const { field, fieldState } = useController({ control, name });
+  const {
+    field: { ref, value, onChange, onBlur },
+    fieldState: { invalid, error },
+  } = useController({ control, name });
   const [visible, setVisible] = useState(false);
   const errorId = `${name}-error`;
 
   return (
-    <Field data-invalid={fieldState.invalid}>
+    <Field data-invalid={invalid}>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
       <InputGroup>
         <InputGroupInput
           id={name}
           type={visible ? "text" : "password"}
-          name={field.name}
-          ref={field.ref}
-          value={field.value ?? ""}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
+          name={name}
+          ref={ref}
+          value={value ?? ""}
+          onChange={onChange}
+          onBlur={onBlur}
           autoComplete={autoComplete}
           placeholder={placeholder}
-          aria-invalid={fieldState.invalid}
-          aria-describedby={fieldState.invalid ? errorId : undefined}
+          aria-invalid={invalid}
+          aria-describedby={invalid ? errorId : undefined}
         />
         <InputGroupAddon align="inline-end">
           <InputGroupButton
@@ -57,7 +60,7 @@ export function PasswordField<T extends FieldValues>({
         </InputGroupAddon>
       </InputGroup>
       {description ? <FieldDescription>{description}</FieldDescription> : null}
-      {fieldState.invalid ? <FieldError id={errorId} errors={[fieldState.error]} /> : null}
+      {invalid ? <FieldError id={errorId} errors={[error]} /> : null}
     </Field>
   );
 }

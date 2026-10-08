@@ -8,6 +8,7 @@ import type { Role } from "@/types/api";
 import { AppSidebar } from "./app-sidebar";
 import { DashboardBreadcrumb } from "./dashboard-breadcrumb";
 import { NavUser, NavUserSkeleton } from "./nav-user";
+import { ShallowUrlState } from "./shallow-url-state";
 
 type DashboardShellProps = {
   role: Role;
@@ -43,7 +44,7 @@ export function DashboardShell({ role, children }: DashboardShellProps) {
           </div>
         </header>
         <main id="main" className="flex flex-1 flex-col gap-6 p-4 sm:p-6 lg:p-8">
-          {children}
+          <ShallowUrlState>{children}</ShallowUrlState>
         </main>
       </SidebarInset>
     </SidebarProvider>

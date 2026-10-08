@@ -49,22 +49,25 @@ export function TextField<T extends FieldValues>({
   type = "text",
   ...inputProps
 }: TextFieldProps<T>) {
-  const { field, fieldState } = useController({ control, name });
+  const {
+    field: { ref, value, onChange, onBlur },
+    fieldState: { invalid, error },
+  } = useController({ control, name });
   const isNumber = type === "number";
 
   return (
-    <Field data-invalid={fieldState.invalid} className={className}>
+    <Field data-invalid={invalid} className={className}>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
       <Input
         {...inputProps}
         id={name}
         type={type}
-        name={field.name}
-        ref={field.ref}
+        name={name}
+        ref={ref}
         // A cleared number box is "no value", not NaN or an empty string.
-        value={field.value ?? ""}
+        value={value ?? ""}
         onChange={(event) =>
-          field.onChange(
+          onChange(
             isNumber
               ? event.target.value === ""
                 ? undefined
@@ -72,14 +75,14 @@ export function TextField<T extends FieldValues>({
               : event.target.value,
           )
         }
-        onBlur={field.onBlur}
-        aria-invalid={fieldState.invalid}
-        aria-describedby={describedBy(name, Boolean(description), fieldState.invalid)}
+        onBlur={onBlur}
+        aria-invalid={invalid}
+        aria-describedby={describedBy(name, Boolean(description), invalid)}
       />
       {description ? (
         <FieldDescription id={ids(name).descriptionId}>{description}</FieldDescription>
       ) : null}
-      {fieldState.invalid ? <FieldError id={ids(name).errorId} errors={[fieldState.error]} /> : null}
+      {invalid ? <FieldError id={ids(name).errorId} errors={[error]} /> : null}
     </Field>
   );
 }
@@ -96,11 +99,14 @@ export function TextareaField<T extends FieldValues>({
   maxLength,
   ...textareaProps
 }: TextareaFieldProps<T>) {
-  const { field, fieldState } = useController({ control, name });
-  const length = typeof field.value === "string" ? field.value.length : 0;
+  const {
+    field: { ref, value, onChange, onBlur },
+    fieldState: { invalid, error },
+  } = useController({ control, name });
+  const length = typeof value === "string" ? value.length : 0;
 
   return (
-    <Field data-invalid={fieldState.invalid} className={className}>
+    <Field data-invalid={invalid} className={className}>
       <div className="flex items-baseline justify-between gap-3">
         <FieldLabel htmlFor={name}>{label}</FieldLabel>
         {maxLength ? (
@@ -112,19 +118,19 @@ export function TextareaField<T extends FieldValues>({
       <Textarea
         {...textareaProps}
         id={name}
-        name={field.name}
-        ref={field.ref}
-        value={field.value ?? ""}
-        onChange={field.onChange}
-        onBlur={field.onBlur}
+        name={name}
+        ref={ref}
+        value={value ?? ""}
+        onChange={onChange}
+        onBlur={onBlur}
         maxLength={maxLength}
-        aria-invalid={fieldState.invalid}
-        aria-describedby={describedBy(name, Boolean(description), fieldState.invalid)}
+        aria-invalid={invalid}
+        aria-describedby={describedBy(name, Boolean(description), invalid)}
       />
       {description ? (
         <FieldDescription id={ids(name).descriptionId}>{description}</FieldDescription>
       ) : null}
-      {fieldState.invalid ? <FieldError id={ids(name).errorId} errors={[fieldState.error]} /> : null}
+      {invalid ? <FieldError id={ids(name).errorId} errors={[error]} /> : null}
     </Field>
   );
 }
@@ -147,24 +153,22 @@ export function SelectField<T extends FieldValues>({
   placeholder = "Select…",
   disabled,
 }: SelectFieldProps<T>) {
-  const { field, fieldState } = useController({ control, name });
+  const {
+    field: { ref, value, onChange, onBlur },
+    fieldState: { invalid, error },
+  } = useController({ control, name });
 
   return (
-    <Field data-invalid={fieldState.invalid} className={className}>
+    <Field data-invalid={invalid} className={className}>
       <FieldLabel htmlFor={name}>{label}</FieldLabel>
-      <Select
-        name={field.name}
-        value={field.value ?? ""}
-        onValueChange={field.onChange}
-        disabled={disabled}
-      >
+      <Select name={name} value={value ?? ""} onValueChange={onChange} disabled={disabled}>
         <SelectTrigger
           id={name}
-          ref={field.ref}
-          onBlur={field.onBlur}
+          ref={ref}
+          onBlur={onBlur}
           className="w-full"
-          aria-invalid={fieldState.invalid}
-          aria-describedby={describedBy(name, Boolean(description), fieldState.invalid)}
+          aria-invalid={invalid}
+          aria-describedby={describedBy(name, Boolean(description), invalid)}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
@@ -179,7 +183,7 @@ export function SelectField<T extends FieldValues>({
       {description ? (
         <FieldDescription id={ids(name).descriptionId}>{description}</FieldDescription>
       ) : null}
-      {fieldState.invalid ? <FieldError id={ids(name).errorId} errors={[fieldState.error]} /> : null}
+      {invalid ? <FieldError id={ids(name).errorId} errors={[error]} /> : null}
     </Field>
   );
 }
@@ -194,7 +198,9 @@ export function SwitchField<T extends FieldValues>({
   className,
   disabled,
 }: SwitchFieldProps<T>) {
-  const { field } = useController({ control, name });
+  const {
+    field: { ref, value, onChange, onBlur },
+  } = useController({ control, name });
 
   return (
     <Field orientation="horizontal" className={className}>
@@ -204,10 +210,10 @@ export function SwitchField<T extends FieldValues>({
       </FieldContent>
       <Switch
         id={name}
-        ref={field.ref}
-        checked={Boolean(field.value)}
-        onCheckedChange={field.onChange}
-        onBlur={field.onBlur}
+        ref={ref}
+        checked={Boolean(value)}
+        onCheckedChange={onChange}
+        onBlur={onBlur}
         disabled={disabled}
       />
     </Field>

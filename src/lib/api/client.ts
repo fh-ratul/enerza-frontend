@@ -24,6 +24,8 @@ const handleExpiredSession = () => {
 
   const here = window.location.pathname + window.location.search;
 
+  // A full page load on purpose: it also throws away every cached query of the ended session.
+  // eslint-disable-next-line @next/next/no-location-assign-relative-destination
   window.location.assign(`/login?expired=1&redirect=${encodeURIComponent(here)}`);
 };
 

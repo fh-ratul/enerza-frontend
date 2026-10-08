@@ -81,7 +81,7 @@ function PasswordChecklist({ password }: { password: string }) {
  */
 export function RegisterWizard({ areas }: { areas: AreaOption[] }) {
   const queryClient = useQueryClient();
-  const { step, draft, setStep, saveDraft, reset } = useRegisterWizard();
+  const { step, setStep, saveDraft, reset } = useRegisterWizard();
   const [isPending, startTransition] = useTransition();
   const [formError, setFormError] = useState<string | null>(null);
   const form = useForm<RegisterFormValues>({
