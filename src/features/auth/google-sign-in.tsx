@@ -18,7 +18,14 @@ type GoogleAccounts = {
     }) => void;
     renderButton: (
       parent: HTMLElement,
-      options: { theme: string; size: string; text: string; shape: string; width: number },
+      options: {
+        theme: string;
+        size: string;
+        text: string;
+        shape: string;
+        width: number;
+        locale?: string;
+      },
     ) => void;
   };
 };
@@ -83,6 +90,8 @@ export function GoogleSignIn() {
       text: "continue_with",
       shape: "pill",
       width: Math.min(container.offsetWidth || 320, 400),
+      // The rest of the page is in English; without this Google follows the browser.
+      locale: "en",
     });
   }, [handleCredential, isScriptReady]);
 
