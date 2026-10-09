@@ -14,7 +14,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Spinner } from "@/components/ui/spinner";
-import { type StatusNoteValues, statusNoteSchema } from "./schemas";
+import { noteSchema, type StatusNoteValues } from "./schemas";
 
 type StatusNoteDialogProps = {
   open: boolean;
@@ -25,6 +25,9 @@ type StatusNoteDialogProps = {
   placeholder: string;
   confirmLabel: string;
   destructive?: boolean;
+  /** The API's length limits for this note. */
+  minLength?: number;
+  maxLength?: number;
   isPending: boolean;
   onConfirm: (note: string) => void;
 };
@@ -39,11 +42,13 @@ export function StatusNoteDialog({
   placeholder,
   confirmLabel,
   destructive = false,
+  minLength = 5,
+  maxLength = 500,
   isPending,
   onConfirm,
 }: StatusNoteDialogProps) {
   const form = useForm<StatusNoteValues>({
-    resolver: zodResolver(statusNoteSchema),
+    resolver: zodResolver(noteSchema(minLength, maxLength)),
     defaultValues: { note: "" },
   });
 
@@ -77,7 +82,7 @@ export function StatusNoteDialog({
             label={noteLabel}
             placeholder={placeholder}
             rows={4}
-            maxLength={500}
+            maxLength={maxLength}
             disabled={isPending}
           />
           <DialogFooter>

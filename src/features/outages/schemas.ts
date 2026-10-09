@@ -21,12 +21,13 @@ export const createIncidentSchema = z.object({
 });
 export type CreateIncidentValues = z.infer<typeof createIncidentSchema>;
 
-/** Resolving and cancelling both need a note. */
-export const statusNoteSchema = z.object({
-  note: z
-    .string("A note is required")
-    .trim()
-    .min(5, "The note must be at least 5 characters long")
-    .max(500, "The note cannot be longer than 500 characters"),
-});
-export type StatusNoteValues = z.infer<typeof statusNoteSchema>;
+/** The note that goes with closing an outage or cancelling a schedule. */
+export const noteSchema = (min = 5, max = 500) =>
+  z.object({
+    note: z
+      .string("A note is required")
+      .trim()
+      .min(min, `Write at least ${min} characters`)
+      .max(max, `Keep it under ${max} characters`),
+  });
+export type StatusNoteValues = { note: string };
