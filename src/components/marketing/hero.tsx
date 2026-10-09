@@ -46,7 +46,7 @@ function GridGlance({ grid }: { grid: GridSnapshot | null }) {
           {stats.map((stat) => (
             <div key={stat.label} className="rounded-2xl border border-white/8 bg-white/5 p-4">
               <dt className="text-xs text-white/55">{stat.label}</dt>
-              <dd className="font-heading nums mt-1 text-2xl font-semibold sm:text-3xl">
+              <dd className="font-heading mt-1 text-2xl font-semibold sm:text-3xl">
                 {stat.value}
               </dd>
             </div>

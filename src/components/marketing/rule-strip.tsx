@@ -22,7 +22,7 @@ export function RuleStrip() {
               className="flex flex-col gap-1.5 px-4 py-8 first:pl-0 sm:px-8 nth-[2n+1]:max-lg:pl-0"
             >
               <dt className="text-muted-foreground order-2 text-sm leading-snug">{rule.label}</dt>
-              <dd className="font-heading nums order-1 text-3xl font-semibold sm:text-4xl">
+              <dd className="font-heading order-1 text-3xl font-semibold sm:text-4xl">
                 {rule.value}
               </dd>
             </Reveal>

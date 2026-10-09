@@ -160,7 +160,7 @@ export default async function AboutPage() {
             {figures.map((figure) => (
               <div key={figure.label} className="bg-card flex flex-col gap-1 p-6 outline outline-border">
                 <dt className="text-muted-foreground text-sm">{figure.label}</dt>
-                <dd className="font-heading nums text-3xl font-semibold">{figure.value}</dd>
+                <dd className="font-heading text-3xl font-semibold">{figure.value}</dd>
               </div>
             ))}
           </dl>

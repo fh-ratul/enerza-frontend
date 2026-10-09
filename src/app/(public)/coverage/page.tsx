@@ -66,7 +66,7 @@ export default async function CoveragePage({ searchParams }: PageProps<"/coverag
             ].map((item) => (
               <div key={item.label} className="flex flex-col">
                 <dt className="text-xs text-white/60">{item.label}</dt>
-                <dd className="font-heading nums text-2xl font-semibold">{item.value}</dd>
+                <dd className="font-heading text-2xl font-semibold">{item.value}</dd>
               </div>
             ))}
           </dl>
