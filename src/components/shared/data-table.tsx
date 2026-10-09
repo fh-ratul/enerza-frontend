@@ -58,8 +58,8 @@ type DataTableProps<T> = {
   error?: unknown;
   onRetry?: () => void;
   empty: { icon: LucideIcon; title: string; description: ReactNode; action?: ReactNode };
-  /** Default sort, used when the URL names none. */
-  defaultSort?: { sortBy: string; sortOrder: "asc" | "desc" };
+  /** Default sort (and page size), used when the URL names none. */
+  defaultSort?: { sortBy: string; sortOrder: "asc" | "desc"; limit?: number };
   onRowClick?: (row: T) => void;
 };
 

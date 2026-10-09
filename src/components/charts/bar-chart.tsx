@@ -40,6 +40,8 @@ type BarChartProps = {
   formatCategory?: (category: string) => string;
   /** Room for the category names of a horizontal chart. */
   categoryWidth?: number;
+  /** Room for the value labels of a vertical chart; widen it for money. */
+  valueAxisWidth?: number;
   className?: string;
 };
 
@@ -58,6 +60,7 @@ export function SimpleBarChart({
   formatTick = (value) => new Intl.NumberFormat("en", { notation: "compact" }).format(value),
   formatCategory = (category) => category,
   categoryWidth = 96,
+  valueAxisWidth = 44,
   className,
 }: BarChartProps) {
   const isHorizontal = orientation === "horizontal";
@@ -65,7 +68,8 @@ export function SimpleBarChart({
     series.map((item, index) => [item.key, { label: item.label, color: SERIES_COLORS[index] }]),
   );
   // A horizontal chart grows with its rows so every label gets a line.
-  const height = isHorizontal ? Math.max(data.length * 36 + 32, 160) : undefined;
+  const rowHeight = Math.max(series.length * 18 + 14, 36);
+  const height = isHorizontal ? Math.max(data.length * rowHeight + 32, 160) : undefined;
 
   return (
     <ChartContainer
@@ -102,6 +106,8 @@ export function SimpleBarChart({
               tickLine={false}
               axisLine={false}
               width={categoryWidth}
+              // Every row keeps its name, however many there are.
+              interval={0}
               tickFormatter={formatCategory}
             />
           </>
@@ -119,7 +125,7 @@ export function SimpleBarChart({
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              width={44}
+              width={valueAxisWidth}
               allowDecimals={false}
               tickFormatter={formatTick}
             />
@@ -151,6 +157,8 @@ export function SimpleBarChart({
             dataKey={item.key}
             fill={`var(--color-${item.key})`}
             maxBarSize={24}
+            // Bars of one group sit side by side instead of spreading over the band.
+            barSize={series.length > 1 ? 16 : undefined}
             // Rounded at the data end, square where the bar meets the baseline.
             radius={isHorizontal ? [0, 4, 4, 0] : [4, 4, 0, 0]}
           />
