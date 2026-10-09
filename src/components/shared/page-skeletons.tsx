@@ -45,14 +45,32 @@ export function OverviewSkeleton() {
   );
 }
 
-/** A page with a filter row and a table. */
-export function TablePageSkeleton({ filters = 3 }: { filters?: number }) {
+/** A page with optional headline numbers, a filter row and a table. */
+export function TablePageSkeleton({
+  search = true,
+  filters = 2,
+  stats = 0,
+}: {
+  /** Whether the filter row starts with a search box. */
+  search?: boolean;
+  /** How many dropdown filters follow it. */
+  filters?: number;
+  /** How many stat tiles sit above the filters. */
+  stats?: number;
+}) {
   return (
     <Busy label="Loading…">
       <HeaderSkeleton />
+      {stats > 0 ? (
+        <div className={stats === 3 ? "grid gap-4 sm:grid-cols-3" : "grid gap-4 sm:grid-cols-2 xl:grid-cols-4"}>
+          {Array.from({ length: stats }, (_, index) => (
+            <StatCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : null}
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Skeleton className="h-9 w-full sm:max-w-xs" />
-        {Array.from({ length: filters - 1 }, (_, index) => (
+        {search ? <Skeleton className="h-9 w-full sm:max-w-xs" /> : null}
+        {Array.from({ length: filters }, (_, index) => (
           <Skeleton key={index} className="h-9 w-full sm:w-44" />
         ))}
       </div>
@@ -72,13 +90,15 @@ export function TablePageSkeleton({ filters = 3 }: { filters?: number }) {
 }
 
 /** A page that lists cards (outages, jobs, schedule days). */
-export function CardListSkeleton({ cards = 4 }: { cards?: number }) {
+export function CardListSkeleton({ cards = 4, filters = true }: { cards?: number; filters?: boolean }) {
   return (
     <Busy label="Loading…">
       <HeaderSkeleton />
-      <div className="flex gap-3">
-        <Skeleton className="h-9 w-44" />
-      </div>
+      {filters ? (
+        <div className="flex gap-3">
+          <Skeleton className="h-9 w-44" />
+        </div>
+      ) : null}
       <div className="flex flex-col gap-4">
         {Array.from({ length: cards }, (_, index) => (
           <div key={index} className="bg-card flex flex-col gap-3 rounded-2xl border p-5">
