@@ -14,6 +14,8 @@ export const ROLE_HOME: Record<Role, string> = {
 
 export const PROTECTED_SECTIONS: { prefix: string; role: Role }[] = [
   { prefix: "/dashboard", role: "CUSTOMER" },
+  // Where a customer lands when a payment gateway sends them back.
+  { prefix: "/payment", role: "CUSTOMER" },
   { prefix: "/technician", role: "TECHNICIAN" },
   { prefix: "/admin", role: "ADMIN" },
 ];

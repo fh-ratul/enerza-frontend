@@ -101,5 +101,12 @@ export async function proxy(request: NextRequest) {
 // Only the protected sections and the guest-only pages: public pages never
 // pass through here, so they stay fully static.
 export const config = {
-  matcher: ["/dashboard/:path*", "/technician/:path*", "/admin/:path*", "/login", "/register"],
+  matcher: [
+    "/dashboard/:path*",
+    "/technician/:path*",
+    "/admin/:path*",
+    "/payment/:path*",
+    "/login",
+    "/register",
+  ],
 };
