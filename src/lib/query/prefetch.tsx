@@ -1,5 +1,6 @@
 import "server-only";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { connection } from "next/server";
 import { cache, type ReactNode } from "react";
 import type { Resource } from "@/lib/api/resources";
 import { serverApi } from "@/lib/api/server";
@@ -24,6 +25,10 @@ type PrefetchProps = {
  * falling over.
  */
 export async function Prefetch({ resources, children }: PrefetchProps) {
+  // Per-visitor by nature: wait for the request before anything reads the clock
+  // (the query cache timestamps what it stores), so none of this is prerendered.
+  await connection();
+
   const queryClient = getQueryClient();
 
   await Promise.all(
