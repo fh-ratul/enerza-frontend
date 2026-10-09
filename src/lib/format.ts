@@ -42,6 +42,12 @@ export const formatDate = (value: DateInput) => dateFormatter.format(toDate(valu
 /** "Fri, 9 Oct" */
 export const formatShortDate = (value: DateInput) => shortDateFormatter.format(toDate(value));
 
+/** "9 Oct" (for chart axes) */
+export const formatDayMonth = (value: DateInput) =>
+  new Intl.DateTimeFormat(LOCALE, { timeZone: TIME_ZONE, day: "numeric", month: "short" }).format(
+    toDate(value),
+  );
+
 /** "19:00" */
 export const formatTime = (value: DateInput) => timeFormatter.format(toDate(value));
 
