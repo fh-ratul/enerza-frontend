@@ -62,7 +62,7 @@ export function BillList() {
       cell: (bill) => (
         <div className="flex flex-col gap-0.5">
           <span className="font-medium">{formatMonth(bill.billingMonth)}</span>
-          <span className="text-muted-foreground font-mono text-xs">{bill.billNumber}</span>
+          <span className="text-muted-foreground hidden font-mono text-xs sm:inline">{bill.billNumber}</span>
         </div>
       ),
     },
@@ -178,7 +178,7 @@ export function BillList() {
       <div
         role="search"
         aria-label="Filter bills"
-        className="flex flex-col gap-3 sm:flex-row sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <FilterSelect paramKey="status" label="Status" allLabel="All bills" options={statusOptions} />
         <ClearFilters keys={["status"]} />

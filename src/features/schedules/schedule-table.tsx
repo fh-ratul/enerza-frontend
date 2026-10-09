@@ -172,7 +172,7 @@ export function ScheduleTable() {
       <div
         role="search"
         aria-label="Filter schedules"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <FilterSelect paramKey="phase" label="Phase" allLabel="Any phase" options={phaseOptions} />
         <FilterSelect paramKey="status" label="Status" allLabel="Any status" options={statusOptions} />

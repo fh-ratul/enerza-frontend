@@ -120,7 +120,7 @@ export function DataTable<T>({
                       isSorted ? (sortOrder === "asc" ? "ascending" : "descending") : undefined
                     }
                     className={cn(
-                      "text-muted-foreground h-11 px-4 text-xs font-medium",
+                      "text-muted-foreground h-11 px-3 text-xs font-medium sm:px-4",
                       column.align === "right" && "text-right",
                       column.hideBelow && HIDE_BELOW[column.hideBelow],
                       column.className,
@@ -173,7 +173,7 @@ export function DataTable<T>({
                       <TableCell
                         key={column.id}
                         className={cn(
-                          "px-4 py-3 align-middle",
+                          "px-3 py-3 align-middle sm:px-4",
                           column.align === "right" && "text-right",
                           column.hideBelow && HIDE_BELOW[column.hideBelow],
                           column.className,

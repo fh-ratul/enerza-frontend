@@ -27,7 +27,7 @@ export function DateFilter({ paramKey, label, min, max, type = "date", className
   return (
     <label
       className={cn(
-        "text-muted-foreground flex w-full items-center gap-2 text-sm sm:w-auto",
+        "text-muted-foreground col-span-2 flex w-full items-center gap-2 text-sm sm:w-auto",
         className,
       )}
     >

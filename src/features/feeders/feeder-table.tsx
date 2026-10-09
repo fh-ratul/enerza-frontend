@@ -157,7 +157,7 @@ export function FeederTable() {
       <div
         role="search"
         aria-label="Filter feeders"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <SearchInput placeholder="Search a feeder or an area…" />
         <FilterSelect paramKey="zoneId" label="Zone" allLabel="All zones" options={grid.zoneOptions} />

@@ -256,7 +256,7 @@ export function OutageBoard() {
       <div
         role="search"
         aria-label="Filter outages"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <FilterSelect paramKey="status" label="Status" allLabel="Any status" options={statusOptions} />
         <FilterSelect

@@ -280,7 +280,7 @@ export function UserTable() {
       <div
         role="search"
         aria-label="Filter users"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <SearchInput placeholder="Search a name, email or meter…" />
         <FilterSelect paramKey="role" label="Role" allLabel="Any role" options={roleOptions} />

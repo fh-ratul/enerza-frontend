@@ -68,7 +68,7 @@ export function SearchInput({ placeholder, paramKey = "searchTerm", className }:
   };
 
   return (
-    <InputGroup className={cn("w-full sm:max-w-xs", className)}>
+    <InputGroup className={cn("col-span-2 w-full sm:max-w-xs", className)}>
       <InputGroupAddon>{isPending ? <Spinner /> : <Search aria-hidden />}</InputGroupAddon>
       <InputGroupInput
         type="search"

@@ -225,7 +225,7 @@ export function AuditLogTable() {
       <div
         role="search"
         aria-label="Filter the audit log"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <FilterSelect paramKey="action" label="Action" allLabel="Any action" options={actionOptions} />
         <FilterSelect

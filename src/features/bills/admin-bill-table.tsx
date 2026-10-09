@@ -211,7 +211,7 @@ export function AdminBillTable() {
       <div
         role="search"
         aria-label="Filter bills"
-        className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+        className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:items-center"
       >
         <FilterSelect paramKey="status" label="Status" allLabel="All bills" options={statusOptions} />
         <DateFilter paramKey="billingMonth" label="Month" type="month" />
