@@ -11,15 +11,15 @@ Built with Next.js 16 (App Router) on top of the [Enerza API](https://github.com
 | API repository | https://github.com/fh-ratul/enerza-backend |
 | Demo video | _to be added_ |
 
-## Demo logins
+## Test accounts
 
-The login page has a **one-click demo button for each role**. The credentials stay on the server: the button calls a Server Action, so nothing is typed and nothing is exposed to the browser.
+The API's seed creates these accounts for trying each role:
 
 | Role | Lands on | Sign in |
 |---|---|---|
-| Customer | `/dashboard` | demo button, or `customer1@enerza.com` / `Enerza@12345` |
-| Technician | `/technician` | demo button, or `tech.north@enerza.com` / `Enerza@12345` |
-| Admin | `/admin` | demo button |
+| Customer | `/dashboard` | `customer1@enerza.com` / `Enerza@12345` |
+| Technician | `/technician` | `tech.north@enerza.com` / `Enerza@12345` |
+| Admin | `/admin` | the `ADMIN_EMAIL` / `ADMIN_PASSWORD` set in the API's environment |
 
 Payments run against the gateways' **test mode**. On SSLCommerz's sandbox page use card `4111 1111 1111 1111`, any future expiry, any CVV, then press **Success** on the OTP page.
 
@@ -79,7 +79,6 @@ npm run dev                    # http://localhost:3000
 | `API_URL` | yes | Enerza API base URL including `/api/v1`. Only the server calls it |
 | `INTERNAL_API_KEY` | recommended | Same value as in the API's `.env`. Lets the API rate-limit and audit per visitor instead of per frontend server |
 | `JWT_ACCESS_SECRET` | optional | Same value as in the API. When set, the proxy verifies the token signature and not only its expiry |
-| `DEMO_*_EMAIL`, `DEMO_*_PASSWORD` | for demo buttons | The three demo accounts. Server-side only |
 | `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | optional | Shows "Continue with Google". The origin of this app must be authorised for that client in Google Cloud |
 | `SMTP_USER`, `SMTP_PASSWORD`, `CONTACT_INBOX` | optional | Gmail SMTP for the contact form |
 

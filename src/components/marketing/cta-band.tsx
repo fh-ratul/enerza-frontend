@@ -41,7 +41,7 @@ export function CtaBand({
                 </Link>
               </Button>
               <Button asChild size="xl" variant="glass">
-                <Link href="/login">Try a demo login</Link>
+                <Link href="/login">Log in</Link>
               </Button>
             </div>
           </div>

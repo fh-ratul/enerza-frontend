@@ -52,7 +52,7 @@ export function RoleCards() {
           href="/login"
           className="text-brand group inline-flex items-center gap-1.5 self-start font-medium lg:self-end"
         >
-          Try each role with a demo login
+          Log in to your account
           <ArrowUpRight
             className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             aria-hidden

@@ -6,7 +6,6 @@ import { backendRequest } from "@/lib/api/backend";
 import { isApiError } from "@/lib/api/errors";
 import { ROLE_HOME, safeRedirectTarget } from "@/lib/auth/config";
 import { clearSessionCookies, getClientIp, setSessionCookies } from "@/lib/auth/session";
-import { getServerEnv } from "@/lib/env";
 import type { AuthTokens, Role } from "@/types/api";
 import { loginSchema, registerPayloadSchema } from "./schemas";
 
@@ -62,41 +61,6 @@ export async function loginAction(input: unknown, redirectTarget?: string): Prom
 
   // redirect() works by throwing, so it stays outside every try/catch.
   redirect(safeRedirectTarget(redirectTarget, result.role));
-}
-
-const DEMO_ROLES: readonly Role[] = ["CUSTOMER", "TECHNICIAN", "ADMIN"];
-
-/**
- * One-click demo login. The demo credentials are read from the server's
- * environment here, so they are never part of the page sent to the browser.
- */
-export async function demoLoginAction(role: Role): Promise<ActionResult> {
-  if (!DEMO_ROLES.includes(role)) {
-    return { ok: false, message: "Unknown demo role." };
-  }
-
-  const env = getServerEnv();
-  const credentials: Record<Role, { email?: string; password?: string }> = {
-    ADMIN: { email: env.DEMO_ADMIN_EMAIL, password: env.DEMO_ADMIN_PASSWORD },
-    TECHNICIAN: { email: env.DEMO_TECHNICIAN_EMAIL, password: env.DEMO_TECHNICIAN_PASSWORD },
-    CUSTOMER: { email: env.DEMO_CUSTOMER_EMAIL, password: env.DEMO_CUSTOMER_PASSWORD },
-  };
-  const { email, password } = credentials[role];
-
-  if (!email || !password) {
-    return {
-      ok: false,
-      message: `The ${role.toLowerCase()} demo account is not configured on this deployment.`,
-    };
-  }
-
-  const result = await authenticate("/auth/login", { email, password });
-
-  if (!("role" in result)) {
-    return result;
-  }
-
-  redirect(ROLE_HOME[result.role]);
 }
 
 export async function registerAction(input: unknown): Promise<ActionResult> {
