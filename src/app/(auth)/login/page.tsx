@@ -7,12 +7,7 @@ import { DemoLogin } from "@/features/auth/demo-login";
 import { GoogleSignIn } from "@/features/auth/google-sign-in";
 import { LoginForm } from "@/features/auth/login-form";
 
-export const metadata: Metadata = {
-  title: "Log in",
-  description:
-    "Log in to Enerza to see your load-shedding schedule, report an outage or pay a bill. Demo accounts for all three roles are one click away.",
-  alternates: { canonical: "/login" },
-};
+export const metadata: Metadata = { title: "Log in" };
 
 function FormFallback() {
   return (

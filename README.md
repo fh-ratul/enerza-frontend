@@ -76,7 +76,6 @@ npm run dev                    # http://localhost:3000
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_APP_URL` | yes | Public URL of this app (metadata, sitemap, Open Graph) |
 | `API_URL` | yes | Enerza API base URL including `/api/v1`. Only the server calls it |
 | `INTERNAL_API_KEY` | recommended | Same value as in the API's `.env`. Lets the API rate-limit and audit per visitor instead of per frontend server |
 | `JWT_ACCESS_SECRET` | optional | Same value as in the API. When set, the proxy verifies the token signature and not only its expiry |
@@ -133,9 +132,9 @@ src/
 
 **Charts** share one colour-blind-safe palette (validated for light and dark surfaces), and every chart can be switched to a table of the same numbers.
 
-## Accessibility and SEO
+## Accessibility
 
-Semantic landmarks, a skip link, labelled controls, visible focus rings, keyboard-operable dialogs and menus (Radix), `aria-sort` on sortable columns, reduced-motion support, and colour never used as the only signal. Public pages have their own metadata, canonical URLs, Open Graph tags, a sitemap and `robots.txt`; signed-in pages are marked `noindex`.
+Semantic landmarks, a skip link, labelled controls, visible focus rings, keyboard-operable dialogs and menus (Radix), `aria-sort` on sortable columns, reduced-motion support, and colour never used as the only signal.
 
 ## Deployment (Vercel)
 

@@ -23,17 +23,7 @@ import { Reveal } from "@/components/shared/reveal";
 import { images } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "What Enerza does for customers, field technicians and the control room: published load-shedding schedules, outage tracking, online bill payment and reliability analytics.",
-  alternates: { canonical: "/services" },
-  openGraph: {
-    title: "Services · Enerza",
-    description:
-      "Published load-shedding schedules, outage tracking from report to repair, and online bill payment.",
-  },
-};
+export const metadata: Metadata = { title: "Services" };
 
 type ServiceGroup = {
   id: string;

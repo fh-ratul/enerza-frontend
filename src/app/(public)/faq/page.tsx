@@ -8,38 +8,11 @@ import { Button } from "@/components/ui/button";
 import { faqGroups } from "@/features/faq/data";
 import { images } from "@/lib/images";
 
-export const metadata: Metadata = {
-  title: "Frequently asked questions",
-  description:
-    "How load-shedding schedules are decided, what happens when you report an outage, how bills are calculated and how to pay them.",
-  alternates: { canonical: "/faq" },
-  openGraph: {
-    title: "Frequently asked questions · Enerza",
-    description: "Schedules, outages, bills and accounts, answered plainly.",
-  },
-};
-
-// Lets search engines show the questions directly in results.
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqGroups.flatMap((group) =>
-    group.items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
-    })),
-  ),
-};
+export const metadata: Metadata = { title: "Frequently asked questions" };
 
 export default function FaqPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        // Static content defined in this repository: nothing here comes from a visitor.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
       <PageHero
         eyebrow="FAQ"
         title="Questions, answered plainly"

@@ -7,12 +7,7 @@ import { RegisterWizard } from "@/features/auth/register-wizard";
 import { toAreaOptions } from "@/features/grid/area-options";
 import { getGridSnapshot } from "@/features/grid/public-data";
 
-export const metadata: Metadata = {
-  title: "Create an account",
-  description:
-    "Register with your area and meter number to see your feeder's load-shedding schedule, report outages and pay your electricity bill online.",
-  alternates: { canonical: "/register" },
-};
+export const metadata: Metadata = { title: "Create an account" };
 
 export default async function RegisterPage() {
   // The area list is public and cached, so this page is still prerendered.

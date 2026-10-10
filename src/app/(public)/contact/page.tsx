@@ -6,16 +6,7 @@ import { Section } from "@/components/marketing/section";
 import { ContactForm } from "@/features/contact/contact-form";
 import { images } from "@/lib/images";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Send Enerza support a message about an outage, a bill or your account. For a power cut happening now, reporting it in the app is fastest.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Contact · Enerza",
-    description: "Reach Enerza support about an outage, a bill or your account.",
-  },
-};
+export const metadata: Metadata = { title: "Contact" };
 
 const shortcuts: { icon: LucideIcon; title: string; body: string; href: string; cta: string }[] = [
   {

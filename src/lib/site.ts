@@ -3,7 +3,6 @@ export const siteConfig = {
   tagline: "Power you can plan around",
   description:
     "Enerza tells you when the power will go out and why, tracks every outage from first report to repair, and lets you pay your electricity bill online.",
-  url: (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/+$/, ""),
   serviceArea: "Dhaka North and Dhaka South",
 } as const;
 

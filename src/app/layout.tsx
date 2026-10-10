@@ -13,32 +13,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s · ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  applicationName: siteConfig.name,
-  keywords: [
-    "load shedding schedule",
-    "power outage",
-    "electricity bill",
-    "Dhaka",
-    "bKash",
-    "SSLCommerz",
-  ],
-  openGraph: {
-    type: "website",
-    siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    locale: "en_BD",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
-    description: siteConfig.description,
   },
 };
 

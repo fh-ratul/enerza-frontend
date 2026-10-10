@@ -9,16 +9,7 @@ import { BillEstimator } from "@/features/tariff/bill-estimator";
 import { images } from "@/lib/images";
 import { BILL_DUE_DAYS, VAT_PERCENT } from "@/lib/tariff";
 
-export const metadata: Metadata = {
-  title: "Tariff and bill estimator",
-  description:
-    "The residential slab tariff, the commercial rate, the demand charge and VAT, with an estimator that shows your electricity bill line by line.",
-  alternates: { canonical: "/tariff" },
-  openGraph: {
-    title: "Tariff and bill estimator · Enerza",
-    description: "See how an electricity bill is calculated, slab by slab, and estimate your own.",
-  },
-};
+export const metadata: Metadata = { title: "Tariff and bill estimator" };
 
 const steps: { title: string; body: string }[] = [
   {

@@ -15,16 +15,7 @@ import { images } from "@/lib/images";
 import { FEEDER_PRIORITY } from "@/lib/status";
 import type { FeederPriority } from "@/types/api";
 
-export const metadata: Metadata = {
-  title: "Coverage",
-  description:
-    "Search the Enerza grid by area or feeder. See which feeder supplies your neighbourhood, its substation and zone, and how it is prioritised when supply is short.",
-  alternates: { canonical: "/coverage" },
-  openGraph: {
-    title: "Coverage · Enerza",
-    description: "Find the feeder that supplies your area, its substation and its zone.",
-  },
-};
+export const metadata: Metadata = { title: "Coverage" };
 
 const priorityOptions = (Object.keys(FEEDER_PRIORITY) as FeederPriority[]).map((value) => ({
   value,

@@ -1,12 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
-
-export const metadata: Metadata = {
-  // A page about one customer's payment has no business in a search index.
-  robots: { index: false, follow: false },
-};
 
 /** A quiet frame for the pages a payment gateway sends the customer back to. */
 export default function CheckoutLayout({ children }: LayoutProps<"/">) {

@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import type { Metadata } from "next";
 import Link from "next/link";
 import { CoverageTeaser } from "@/components/marketing/coverage-teaser";
 import { CtaBand } from "@/components/marketing/cta-band";
@@ -15,10 +14,6 @@ import { Reveal } from "@/components/shared/reveal";
 import { Button } from "@/components/ui/button";
 import { featuredFaqs } from "@/features/faq/data";
 import { getGridSnapshot } from "@/features/grid/public-data";
-
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-};
 
 export default async function HomePage() {
   // Cached ("use cache"), so this page is prerendered with real grid figures.

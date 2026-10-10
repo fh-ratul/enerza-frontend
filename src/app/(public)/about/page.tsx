@@ -9,16 +9,7 @@ import { getGridSnapshot } from "@/features/grid/public-data";
 import { formatMW } from "@/lib/format";
 import { images } from "@/lib/images";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Why Enerza exists: load shedding is sometimes unavoidable, but not knowing when it will happen is. How the grid is modelled and the principles the system is built on.",
-  alternates: { canonical: "/about" },
-  openGraph: {
-    title: "About · Enerza",
-    description: "Load shedding is sometimes unavoidable. Not knowing when it will happen is not.",
-  },
-};
+export const metadata: Metadata = { title: "About" };
 
 const principles: { icon: LucideIcon; title: string; body: string }[] = [
   {

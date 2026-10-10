@@ -5,10 +5,7 @@ import { Logo } from "@/components/brand/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Page not found",
-  description: "The page you were looking for does not exist on Enerza.",
-};
+export const metadata: Metadata = { title: "Page not found" };
 
 const destinations = [
   { href: "/coverage", label: "Coverage", body: "Find the feeder that supplies your area" },
