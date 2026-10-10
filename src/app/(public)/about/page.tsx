@@ -160,7 +160,7 @@ export default async function AboutPage() {
 
       <CtaBand
         title="See the system from the inside."
-        description="Create an account to follow your feeder's schedule, report an outage and pay your bill."
+        description="Demo accounts for a customer, a technician and an administrator are one click away on the login page."
       />
     </>
   );
