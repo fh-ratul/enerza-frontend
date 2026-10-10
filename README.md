@@ -6,7 +6,8 @@ Built with Next.js 16 (App Router) on top of the [Enerza API](https://github.com
 
 | | |
 |---|---|
-| Live site | _to be added after deployment_ |
+| Live site | https://enerza-frontend.vercel.app |
+| Live API | https://enerza-backend.vercel.app |
 | API repository | https://github.com/fh-ratul/enerza-backend |
 | Demo video | _to be added_ |
 
